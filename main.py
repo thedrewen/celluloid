@@ -1,6 +1,6 @@
 import pygame as pg
 from pygame import gfxdraw
-import time, random, os, math, discordrpc, threading
+import time, random, os, math, threading
 from Utils import Color, taille_cote_carrer_inscrit
 from Interfaces import CloseButton, Statistiques, PauseButton, Menu, MenuButton
 
@@ -237,19 +237,6 @@ class Game:
 
         self.play = True
         self.devmode = False
-
-        try:
-            self.rpc = discordrpc.RPC(app_id=1228375871388258404)
-
-            self.rpc.set_activity(
-                state="Celluloid ZeroPlayerGame",
-                details="Anomalies : " + str(self.anomalies),
-                large_image="logo"
-            )
-
-            threading.Thread(target=self.runRPC).start()
-        except:
-            pass
 
     def runRPC(self):
         actual_rpc_anom = self.anomalies
